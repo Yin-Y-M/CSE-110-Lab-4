@@ -40,6 +40,7 @@ const AddExpenseForm = () => {
             id="name"
             value={name}  // Controlled input for name
             onChange={(e) => setName(e.target.value)}  // Update name state on change
+            data-testid="input-name"
           />
         </div>
         <div className="col-sm">
@@ -51,6 +52,7 @@ const AddExpenseForm = () => {
             id="cost"
             value={cost}  // Controlled input for cost
             onChange={(e) => setCost(e.target.value)}  // Update cost state on change
+            data-testid="cost-num"
           />
         </div>
         <div className="col-sm">
