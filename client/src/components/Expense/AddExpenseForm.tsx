@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext";  // Import the AppContext
 import { Expense } from "../../types/types";  // Import the type for Expense
 import { v4 as uuidv4 } from 'uuid';
+import { createExpense } from "../../utils/expense-utils";
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
@@ -17,9 +18,11 @@ const AddExpenseForm = () => {
     const newExpense: Expense = {
         //id: Date.now(),  // Simple ID generation, you may want a better approach
         id: uuidv4(),
-        name: name,
+        description: name,
         cost: parseFloat(cost),  // Convert the cost to a number
       };
+
+    createExpense(newExpense);  
 
     // Add new expense to the context array
     setExpenses([...expenses, newExpense]);
