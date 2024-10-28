@@ -26,7 +26,10 @@ describe("Budget Tracker Application", () => {
 
     //Verify the new expense is added
     expect(screen.getByText("MyExpense")).toBeInTheDocument();
+    //correct version: 
     expect(screen.getByText("$200")).toBeInTheDocument();
+    //test for incorrect
+    //expect(screen.getByText("$100")).toBeInTheDocument();
     // Check total expenses and remaining budget
     
     expect(screen.getByTestId("remaining-alert")).toHaveTextContent("Remaining: $800"); // Assuming initial budget is $1000
