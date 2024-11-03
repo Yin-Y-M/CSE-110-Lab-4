@@ -6,7 +6,6 @@ import { Expense } from "../types/types";
 interface AppContextType {
   expenses: Expense[];
   setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>;
-  //Added:
   budget: number;
   setBudget: React.Dispatch<React.SetStateAction<number>>;
 }

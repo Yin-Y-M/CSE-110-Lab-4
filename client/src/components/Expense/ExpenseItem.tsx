@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 //sth new added 10.28
 import { fetchExpenses, deleteExpense } from "../../utils/expense-utils";
-import { useCallback } from "react";
 
 const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here

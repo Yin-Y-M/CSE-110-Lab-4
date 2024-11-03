@@ -2,8 +2,6 @@ import { Expense } from "../types";
 import { Request, Response } from "express";
 
 export function createExpenseServer(req: Request, res: Response, expenses: Expense[]) {
-    //test
-    console.log("createExpenseServer function triggered");
     const { id, cost, description } = req.body;
 
     if (!description || !id || !cost) {
@@ -21,12 +19,6 @@ export function createExpenseServer(req: Request, res: Response, expenses: Expen
 }
 
 export function deleteExpense(req: Request, res: Response, expenses: Expense[]) {
-    console.log("deleteExpense function triggered"); // Log to confirm the function call
-    console.log("Request params:", req.params);
-    // TO DO: Implement deleteExpense function
-    console.log("deleteExpense function triggered");
-    console.log("Request params:", req.params);
-
     const { id } = req.params;
     const initialLength = expenses.length;
 
