@@ -38,23 +38,41 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
  
  }
  
+// export function deleteExpense(req: Request, res: Response, expenses: Expense[]) {
+//     const { id } = req.params;
+//     const initialLength = expenses.length;
 
-export function deleteExpense(req: Request, res: Response, expenses: Expense[]) {
-    const { id } = req.params;
-    const initialLength = expenses.length;
+//     // Remove the expense with the matching ID
+//     const updatedExpenses = expenses.filter(expense => expense.id !== id);
 
-    // Remove the expense with the matching ID
-    const updatedExpenses = expenses.filter(expense => expense.id !== id);
+//     if (updatedExpenses.length === initialLength) {
+//         // No expense found with the given ID
+//         return res.status(404).send({ error: "Expense not found" });
+//     }
 
-    if (updatedExpenses.length === initialLength) {
-        // No expense found with the given ID
-        return res.status(404).send({ error: "Expense not found" });
+//     // Update the expenses array in place (if this is intended to be a mutable array)
+//     expenses.length = 0;
+//     expenses.push(...updatedExpenses);
+// }
+export async function deleteExpense(req: Request, res: Response, db: Database) {
+    try {
+        const { id } = req.params;
+
+        const expense = await db.get('SELECT * FROM expenses WHERE id = ?', [id]);
+        
+        if (!expense) {
+            return res.status(404).send({ error: "Expense not found" });
+        }
+
+        // Delete the expense if it exists
+        await db.run('DELETE FROM expenses WHERE id = ?', [id]);
+        return res.status(200).send({ message: "Expense deleted successfully" });
+
+    } catch (error) {
+        return res.status(500).send({ error: `Could not delete expense: ${error}` });
     }
-
-    // Update the expenses array in place (if this is intended to be a mutable array)
-    expenses.length = 0;
-    expenses.push(...updatedExpenses);
 }
+
 
 // export function getExpenses(req: Request, res: Response, expenses: Expense[]) {
 //     res.status(200).send({ "data": expenses });
